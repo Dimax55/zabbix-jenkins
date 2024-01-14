@@ -16,6 +16,7 @@ pipeline  {
             steps {
                 sh '''
                 sudo su
+                echo "1111"
                 cd /var/lib/jenkins/workspace/
                 rm -rf ansible-jenkins
                 git clone https://github.com/Dimax55/ansible-jenkins.git
