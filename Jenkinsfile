@@ -1,12 +1,12 @@
 #!groovy
 //  groovy Jenkinsfile
 properties([disableConcurrentBuilds()])\
-
+ 
 pipeline  {
         agent { 
            label ''
         }
-
+ 
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -17,7 +17,7 @@ pipeline  {
                 sh '''
                 cd /var/lib/jenkins/workspace/
                 rm -rf ansible-jenkins
-                git clone https://github.com/Cyber1993/ansible-jenkins.git
+                git clone https://github.com/Dimax55/ansible-jenkins.git
                 '''
             }                
         }    
@@ -25,7 +25,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /var/lib/jenkins/workspace/ansible-jenkins/Ansinle
-                docker build -t yurashupik/md221 .
+                docker build -t dimax555/mnm221 .
                 '''
             }
         } 
@@ -34,14 +34,14 @@ pipeline  {
                 sh '''
                 docker run \
                 --name ansible \
-                -d yurashupik/md221
+                -d dimax555/mnm221
                 '''
             }
         }
         stage("docker login") {
             steps {
                 echo " ============== docker login =================="
-                withCredentials([usernamePassword(credentialsId: 'yurashupikjenkins', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'ubuntu23-clone', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
                         def loginResult = sh(script: "docker login -u $USERNAME -p $PASSWORD", returnStatus: true)
                         if (loginResult != 0) {
@@ -52,12 +52,12 @@ pipeline  {
                 echo " ============== docker login completed =================="
             }
         }
-
+ 
         stage("docker push") {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push yurashupik/md221
+                docker push dimax555/mnm221
                 '''
             }
         }
