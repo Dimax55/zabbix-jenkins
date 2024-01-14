@@ -15,6 +15,7 @@ pipeline  {
         stage("Git clone") {
             steps {
                 sh '''
+                sudo su
                 cd /var/lib/jenkins/workspace/
                 rm -rf ansible-jenkins
                 git clone https://github.com/Dimax55/ansible-jenkins.git
