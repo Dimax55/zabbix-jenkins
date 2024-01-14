@@ -17,7 +17,7 @@ pipeline  {
                 sh '''
                 cd /var/lib/jenkins/workspace/
                 rm -rf ansible-jenkins
-                git clone https://github.com/Dimax55/ansible-jenkins.git
+                git clone git@github.com:Dimax55/zabbix-jenkins.git
                 '''
             }                
         }    
@@ -33,7 +33,7 @@ pipeline  {
             steps {
                 sh '''
                 docker run \
-                --name ansible \
+                --name zabbix \
                 -d dimax555/mnm221
                 '''
             }
