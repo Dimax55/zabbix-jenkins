@@ -29,10 +29,6 @@ pipeline  {
                 sh '''
                 echo "test"
                 #docker network rm zabbix-net
-                if(!containerExists) {
-                docker stop $(docker ps -q)
-                }
-                docker systen prune -a
                 docker network create zabbix-net            
                 '''
             }
