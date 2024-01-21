@@ -24,6 +24,17 @@ pipeline  {
                 '''
             } 
         }
+        stage("clear") {
+            steps {
+                sh '''
+                docker stop zabbix-web
+                docker stop zabbix-server
+                docker stop zabbix-postgres
+                docker network rm zabbix-net
+                docker system prune -a
+                    '''
+            }
+        }
         stage("network") {
             steps {
                 sh '''
