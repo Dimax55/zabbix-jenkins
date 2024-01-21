@@ -33,7 +33,7 @@ pipeline  {
                 docker stop $(docker ps -q)
                 }
                 docker systen prune -a
-                docker network create zabbix-net            
+                #docker network create zabbix-net            
                 '''
             }
         }
