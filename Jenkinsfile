@@ -112,7 +112,9 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                
+                docker push -t dimax555/mnm221:zabbix-postgres1
+                docker push -t dimax555/mnm221:zabbix-server1
+                docker push -t dimax555/mnm221:zabbix-web1
                 '''
             }
         }
