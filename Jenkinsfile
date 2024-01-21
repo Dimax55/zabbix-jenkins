@@ -28,7 +28,7 @@ pipeline  {
             steps {
                 sh '''
                 echo "test"
-                docker network rm zabbix-net
+                #docker network rm zabbix-net
                 docker network create zabbix-net            
                 '''
             }
