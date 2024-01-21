@@ -143,7 +143,14 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-
+                sudo docker run -d \
+                --name zabbix-postgres \
+                --network zabbix-net \
+                -v /var/lib/zabbix/timezone:/etc/timezone \
+                -v /var/lib/zabbix/localtime:/etc/localtime \
+                -e POSTGRES_PASSWORD=zabbix \
+                -e POSTGRES_USER=zabbix \
+                -d dimax555/mnm221:zabbix-postgres1
 
 
                 sudo docker run \
