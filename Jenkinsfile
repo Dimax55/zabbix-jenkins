@@ -112,6 +112,9 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
+                docker tag zabbix/zabbix-web-nginx-pgsql:alpine-latest dimax555/mnm221:zabbix-web1
+                docker tag zabbix/zabbix-server-pgsql:alpine-latest dimax555/mnm221:zabbix-server1
+                docker tag postgres:alpine dimax555/mnm221:zabbix-postgres1
                 docker push dimax555/mnm221:zabbix-postgres1
                 docker push dimax555/mnm221:zabbix-server1
                 docker push dimax555/mnm221:zabbix-web1
