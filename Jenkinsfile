@@ -28,7 +28,9 @@ pipeline  {
             steps {
                 sh '''
                 echo "test"
-                #docker network rm zabbix-net
+                docker network rm zabbix-net
+                docker stop $(docker ps -q)
+                docker systen prune -a
                 docker network create zabbix-net            
                 '''
             }
@@ -107,7 +109,7 @@ pipeline  {
                 echo " ============== docker login completed =================="
             }
         }
-
+       
         stage("docker push") {
             steps {
                 echo " ============== pushing image =================="
@@ -121,5 +123,33 @@ pipeline  {
                 '''
             }
         }
+               stage("remove") {
+            steps {
+                echo " ============== remune =================="
+                sh '''
+                docker stop $(docker ps -q) && docker rm $(docker ps -a -q)
+                '''
+            }
+        }    
+            stage("docker pull") {
+            steps {
+                echo " ============== pushing image =================="
+                sh '''
+               docker pull dimax555/mnm221:zabbix-postgres1
+               docker pull dimax555/mnm221:zabbix-server1
+               docker pull dimax555/mnm221:zabbix-web1
+                '''
+            }
+        }
+          stage("docker run") {
+            steps {
+                echo " ============== pushing image =================="
+                sh '''
+               docker run dimax555/mnm221:zabbix-postgres1
+               docker run  dimax555/mnm221:zabbix-server1
+               docker run dimax555/mnm221:zabbix-web1
+                '''
+            }
+        }  
     }
 }
